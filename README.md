@@ -36,3 +36,4 @@
 6. 뷰
 7. 폼
 8. 배포 (psycopg2-binary도 설치)
+9. 보안 강화(dotenv-.env)

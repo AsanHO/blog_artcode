@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import django_heroku
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0#3&vi+tkc)*@m%^$mgts-z6wdeob%^y$kwxgms9um#zh!aob)"
+print(os.environ.get("DJANGO_SECRET_KEY"))
+print(os.environ.get("DATABASE_NAME"))
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", ".herokuapp.com"]
 
@@ -80,10 +82,10 @@ WSGI_APPLICATION = "djangoblog.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "mysql.connector.django",
-        "NAME": "djangotestdb",  # DB name
-        "USER": "root",  # DB account
-        "PASSWORD": "5015",  # DB account's password
-        "HOST": "127.0.0.1",  # DB address(IP)
+        "NAME": os.environ.get("DATABASE_NAME"),  # DB name
+        "USER": os.environ.get("DATABASE_USER"),  # DB account
+        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),  # DB account's password
+        "HOST": os.environ.get("DATABASE_HOST"),  # DB address(IP)
         "PORT": "3306",  # DB port(normally 3306)
     }
 }
